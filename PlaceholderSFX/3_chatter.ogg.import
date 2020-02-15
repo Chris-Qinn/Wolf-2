@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/3_chatter.ogg-c00322eb56d23d40029f84dafad7ac50.oggstr"
+
+[deps]
+
+source_file="res://PlaceholderSFX/3_chatter.ogg"
+dest_files=[ "res://.import/3_chatter.ogg-c00322eb56d23d40029f84dafad7ac50.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

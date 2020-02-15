@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/7_bouncyjump.ogg-64f23a416378c556a13e1b9b1addae67.oggstr"
+
+[deps]
+
+source_file="res://PlaceholderSFX/7_bouncyjump.ogg"
+dest_files=[ "res://.import/7_bouncyjump.ogg-64f23a416378c556a13e1b9b1addae67.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

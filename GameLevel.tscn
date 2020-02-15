@@ -10,3 +10,16 @@ position = Vector2( 462, 312 )
 
 [node name="platform\?" parent="." instance=ExtResource( 2 )]
 position = Vector2( 471, 437 )
+
+[node name="KinematicBody2D" type="KinematicBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="KinematicBody2D"]
+polygon = PoolVector2Array( 20, -7.642, 20, 585, 1002, 585, 1002, -5.057, 1042.91, -5.05682, 1044.21, 620.443, -15.5258, 612.689, -11.6487, -17.9804 )
+one_way_collision_margin = 0.0
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Polygon2D" type="Polygon2D" parent="KinematicBody2D/CollisionPolygon2D"]
+color = Color( 0.164706, 0.152941, 0.152941, 1 )
+polygon = PoolVector2Array( 20, -7.642, 20, 585, 1002, 585, 1002, -5.057, 1042.91, -5.05682, 1044.21, 620.443, -15.5258, 612.689, -11.6487, -17.9804 )
