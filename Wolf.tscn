@@ -26,4 +26,11 @@ shape = SubResource( 1 )
 [node name="WolfSprite" type="AnimatedSprite" parent="KinematicBody2D"]
 frames = SubResource( 2 )
 animation = "move"
+frame = 1
 playing = true
+
+[node name="Light2D" type="Light2D" parent="KinematicBody2D"]
+position = Vector2( -0.0325127, 0.0554707 )
+scale = Vector2( 0.0118082, 24.4839 )
+texture_scale = 29.33
+shadow_enabled = true
