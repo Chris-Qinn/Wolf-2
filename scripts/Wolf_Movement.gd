@@ -20,12 +20,10 @@ func _ready():
 #	passsdlf
 
 func get_input():
-	if Input.is_action_pressed("ui_left"):
-		velocity.x = -walkspeed
-	elif Input.is_action_pressed("ui_right"):
-		velocity.x = walkspeed
-	else:
-		velocity.x = 0
+
+	var LRJoy = Input.get_action_strength("right") - Input.get_action_strength("left")
+	velocity.x = LRJoy*walkspeed
+
 	
 			
 func _physics_process(delta):

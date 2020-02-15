@@ -4,10 +4,10 @@
 [ext_resource path="res://pixil-frame-1.png" type="Texture" id=2]
 [ext_resource path="res://scripts/Wolf_Movement.gd" type="Script" id=3]
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 11.9927, 12.3063 )
 
-[sub_resource type="SpriteFrames" id=1]
+[sub_resource type="SpriteFrames" id=2]
 animations = [ {
 "frames": [ ExtResource( 1 ), ExtResource( 2 ) ],
 "loop": true,
@@ -21,10 +21,10 @@ animations = [ {
 script = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="KinematicBody2D"]
-frames = SubResource( 1 )
+frames = SubResource( 2 )
 animation = "move"
 frame = 1
 playing = true
