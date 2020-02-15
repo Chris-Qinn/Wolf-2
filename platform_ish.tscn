@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=2]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+
+[sub_resource type="Gradient" id=2]
+colors = PoolColorArray( 0, 0, 0, 1, 0.792969, 0.130096, 0.130096, 1 )
+
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
+
+[node name="Node2D" type="Node2D"]
+
+[node name="KinematicBody2D" type="KinematicBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="KinematicBody2D"]
+material = SubResource( 1 )
+polygon = PoolVector2Array( 9.90059, -7.13079, 47.7676, 1.23151, 9.90059, 7.22712, 10.6895, 33.734, -29.5442, 32.314, -34.1198, -10.1286, 8.16502, -22.4354 )
+
+[node name="Polygon2D" type="Polygon2D" parent="KinematicBody2D/CollisionPolygon2D"]
+texture = SubResource( 3 )
+polygon = PoolVector2Array( 9.74281, 7.22712, 47.2943, 1.38929, 10.0584, -7.60413, 8.3228, -22.4354, -34.1198, -10.6019, -29.702, 31.8407, 10.6895, 33.4185 )
