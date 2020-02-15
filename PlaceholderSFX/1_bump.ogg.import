@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/1_bump.ogg-a88e9f6bf4b827fd681c8715a1a154fd.oggstr"
+
+[deps]
+
+source_file="res://PlaceholderSFX/1_bump.ogg"
+dest_files=[ "res://.import/1_bump.ogg-a88e9f6bf4b827fd681c8715a1a154fd.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

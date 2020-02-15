@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/5_checkpoint.ogg-08453fef53dac747521338eefc70eb7a.oggstr"
+
+[deps]
+
+source_file="res://PlaceholderSFX/5_checkpoint.ogg"
+dest_files=[ "res://.import/5_checkpoint.ogg-08453fef53dac747521338eefc70eb7a.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
