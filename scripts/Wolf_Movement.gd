@@ -325,6 +325,7 @@ func _physics_process(delta):
 	if collision:
 #		is_on_surface = true;
 		surface_normal = collision.normal
+		print("Collision");
 		
 		# Check if this is ground enough to give dash back
 		if collision.normal.y < -0.5:

@@ -10,7 +10,7 @@ extents = Vector2( 11.9927, 12.3063 )
 [sub_resource type="CanvasItemMaterial" id=2]
 light_mode = 1
 
-[sub_resource type="CanvasItemMaterial" id=4]
+[sub_resource type="CanvasItemMaterial" id=3]
 blend_mode = 1
 light_mode = 2
 particles_animation = true
@@ -38,7 +38,7 @@ playing = true
 visible = false
 self_modulate = Color( 1, 1, 1, 0.509804 )
 show_behind_parent = true
-material = SubResource( 4 )
+material = SubResource( 3 )
 polygon = PoolVector2Array( -36.8428, -26.6318, -36.8428, -18.4209, -43.0564, -18.4209, -55.2618, -8.21281, -58.1467, 22.4115, -53.4865, 29.9566, -36.8428, 36.1703, -34.6236, 40.3867, 38.3865, 39.9428, 38.8304, -27.2975, 33.5044, -28.8509, 33.2825, -46.1603, 27.2908, -45.4946, 11.9786, -30.4044, -2.66782, -28.8509, -6.6623, -38.3933, -17.7581, -44.6069, -23.9717, -45.4946, -28.1881, -29.7386 )
 
 [node name="Light2D" type="Light2D" parent="WolfBody/WolfSprite"]
