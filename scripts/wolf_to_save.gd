@@ -17,5 +17,5 @@ func _ready():
 
 
 func _on_Area2D_body_entered(body):
-	if body.name == "Wolf":
+	if body.name == "WolfBody":
 		body.has_colours.append(colour)

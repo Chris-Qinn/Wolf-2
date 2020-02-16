@@ -20,27 +20,27 @@ particles_anim_loop = false
 
 [node name="Node2D" type="Node2D"]
 
-[node name="KinematicBody2D" type="KinematicBody2D" parent="."]
+[node name="WolfBody" type="KinematicBody2D" parent="."]
 script = ExtResource( 3 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WolfBody"]
 shape = SubResource( 1 )
 
-[node name="WolfSprite" type="AnimatedSprite" parent="KinematicBody2D"]
+[node name="WolfSprite" type="AnimatedSprite" parent="WolfBody"]
 material = SubResource( 2 )
 scale = Vector2( 0.389014, 0.389014 )
 frames = ExtResource( 1 )
 animation = "white"
 playing = true
 
-[node name="Polygon2D" type="Polygon2D" parent="KinematicBody2D/WolfSprite"]
+[node name="Polygon2D" type="Polygon2D" parent="WolfBody/WolfSprite"]
 visible = false
 self_modulate = Color( 1, 1, 1, 0.509804 )
 show_behind_parent = true
 material = SubResource( 4 )
 polygon = PoolVector2Array( -36.8428, -26.6318, -36.8428, -18.4209, -43.0564, -18.4209, -55.2618, -8.21281, -58.1467, 22.4115, -53.4865, 29.9566, -36.8428, 36.1703, -34.6236, 40.3867, 38.3865, 39.9428, 38.8304, -27.2975, 33.5044, -28.8509, 33.2825, -46.1603, 27.2908, -45.4946, 11.9786, -30.4044, -2.66782, -28.8509, -6.6623, -38.3933, -17.7581, -44.6069, -23.9717, -45.4946, -28.1881, -29.7386 )
 
-[node name="Light2D" type="Light2D" parent="KinematicBody2D/WolfSprite"]
+[node name="Light2D" type="Light2D" parent="WolfBody/WolfSprite"]
 show_behind_parent = true
 texture = ExtResource( 6 )
 texture_scale = 1.5
