@@ -19,9 +19,9 @@ texture = ExtResource( 4 )
 position = Vector2( 370.458, 397.223 )
 scale = Vector2( 0.3, 0.3 )
 
-[node name="GLowplant" parent="." instance=ExtResource( 1 )]
+[node name="Wolf" parent="." instance=ExtResource( 1 )]
 position = Vector2( 151.544, 1008.8 )
 
-[node name="Node2D2" parent="." instance=ExtResource( 3 )]
+[node name="GLowPlant" parent="." instance=ExtResource( 3 )]
 position = Vector2( 1092.53, 240.408 )
 colour = "pink"

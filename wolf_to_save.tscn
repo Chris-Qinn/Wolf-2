@@ -10,9 +10,10 @@ extents = Vector2( 13, 13 )
 script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-scale = Vector2( 0.389, 0.389 )
+position = Vector2( -1, -2 )
+scale = Vector2( 0.115, 0.115 )
 frames = ExtResource( 1 )
-animation = "white"
+animation = "green"
 
 [node name="Area2D" type="Area2D" parent="."]
 

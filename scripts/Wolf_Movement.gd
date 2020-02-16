@@ -54,7 +54,7 @@ func change_wolf(colour):
 		$WolfSprite.animation = "yellow"
 	elif colour == "pink" and "pink" in has_colours:
 		wolf = "pink"
-		$WolfSprite.animation = "pink"
+		$WolfSprite.animation = "pink_wall_hold"
 
 
 # Update controls somewhat
@@ -142,6 +142,7 @@ func do_jump():
 # This executes a wall jump
 func do_wall_jump(x):
 	state = "jumping"
+	$WolfSprite.animation = "pink"
 	velocity.x = x
 	velocity.y = -1
 	velocity = jumpvelocity*velocity.normalized()
@@ -186,12 +187,14 @@ func state_machine( delta ):
 			do_wall_jump(-1.0);
 		elif LRJoy <= 0 and LRKey <= 0:
 			state = "falling"
+			$WolfSprite.animation = "pink"
 	
 	if state == "leftwalling":
 		if Input.is_action_just_pressed("jump"):
 			do_wall_jump(1.0);
 		elif LRJoy >= 0 and LRKey >= 0:
 			state = "falling"
+			$WolfSprite.animation = "pink"
 #
 #
 #
@@ -224,6 +227,9 @@ func state_machine( delta ):
 
 
 func _physics_process(delta):
+
+	if position.x < -2000 or position.x > 2000 or position.y > 2000 or position.y < -2000:
+		get_tree().reload_current_scene()
 
 	# Define some states that help us figure out what we're doing
 #	on_ground = is_on_surface and (surface_normal.y < -0.5)
@@ -353,12 +359,14 @@ func _physics_process(delta):
 				velocity.y = 0;
 	elif state == "rightwalling" or state == "leftwalling" or state == "grounded":
 		state = "falling"
+		$WolfSprite.animation = "pink"
 
 #	else:
 #		is_on_surface = false;
 	
-	if velocity.x > 0:
+	if velocity.x > 0 or state == "leftwalling":
 		$"WolfSprite".flip_h = false;
-	elif velocity.x < 0:
+	elif velocity.x < 0 or state == "rightwalling":
 		$"WolfSprite".flip_h = true;
+	
 	

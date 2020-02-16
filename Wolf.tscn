@@ -28,7 +28,8 @@ shape = SubResource( 1 )
 
 [node name="WolfSprite" type="AnimatedSprite" parent="WolfBody"]
 material = SubResource( 2 )
-scale = Vector2( 0.389014, 0.389014 )
+position = Vector2( -1, -2 )
+scale = Vector2( 0.115, 0.115 )
 frames = ExtResource( 1 )
 animation = "white"
 playing = true
