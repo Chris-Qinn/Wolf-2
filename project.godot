@@ -93,3 +93,4 @@ bounce={
 [rendering]
 
 quality/intended_usage/framebuffer_allocation.mobile=2
+environment/default_environment="res://default_env.tres"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Wolf.tscn" type="PackedScene" id=1]
 [ext_resource path="res://platform_ish.tscn" type="PackedScene" id=2]
@@ -8,8 +8,9 @@
 [ext_resource path="res://icon.png" type="Texture" id=6]
 [ext_resource path="res://Lighting/light.png" type="Texture" id=7]
 [ext_resource path="res://Photos/tree_wall.png" type="Texture" id=8]
+[ext_resource path="res://mytiles.tscn" type="PackedScene" id=9]
 
-[sub_resource type="GDScript" id=6]
+[sub_resource type="GDScript" id=1]
 script/source = "extends CPUParticles2D
 
 
@@ -29,7 +30,6 @@ func _ready():
 "
 
 [sub_resource type="AtlasTexture" id=2]
-flags = 4
 atlas = ExtResource( 8 )
 
 [sub_resource type="Shader" id=3]
@@ -99,7 +99,6 @@ shadow_color = Color( 0.0392157, 0.0313726, 0.0313726, 0 )
 
 [node name="fake2D3" type="Light2D" parent="fake flare"]
 position = Vector2( 180.132, -225.014 )
-scale = Vector2( 1, 1 )
 texture = ExtResource( 7 )
 offset = Vector2( -100, 100 )
 texture_scale = 0.4
@@ -113,6 +112,8 @@ offset = Vector2( -100, 100 )
 texture_scale = 1.65
 color = Color( 0.843137, 0.545098, 0.34902, 1 )
 energy = 1.8
+
+[node name="Node2D" parent="." instance=ExtResource( 9 )]
 
 [node name="Wolf" parent="." instance=ExtResource( 1 )]
 position = Vector2( 760.956, 292.867 )
@@ -135,7 +136,7 @@ spread = 0.0
 gravity = Vector2( 0, 3 )
 scale_amount = 0.01
 color = Color( 0.0784314, 0.843137, 0.827451, 1 )
-script = SubResource( 6 )
+script = SubResource( 1 )
 
 [node name="platform\?" parent="." instance=ExtResource( 2 )]
 position = Vector2( 500, 437 )
@@ -188,5 +189,6 @@ shadow_enabled = true
 shadow_color = Color( 0.0392157, 0.0313726, 0.0313726, 0 )
 
 [node name="StarsLESSLAG" parent="." instance=ExtResource( 4 )]
+visible = false
 show_behind_parent = true
 position = Vector2( -0.000244141, 0 )

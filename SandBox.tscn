@@ -15,10 +15,10 @@ glow_blend_mode = 0
 glow_hdr_threshold = 0.93
 adjustment_enabled = true
 
-[sub_resource type="OccluderPolygon2D" id=3]
+[sub_resource type="OccluderPolygon2D" id=2]
 polygon = PoolVector2Array( 1784.71, 482.925, 1580.17, 482.925, 1584.07, 184.879, 1841.21, 198.515, 1823.67, 225.787, 1628.87, 239.423, 1623.03, 336.824, 1755.49, 348.512, 1751.6, 371.888, 1617.18, 377.732, 1617.18, 440.069, 1815.88, 440.069 )
 
-[sub_resource type="CanvasItemMaterial" id=2]
+[sub_resource type="CanvasItemMaterial" id=3]
 blend_mode = 1
 
 [node name="SandBoxLevel" type="Node2D"]
@@ -96,14 +96,14 @@ polygon = PoolVector2Array( 1920, 0, 1920, 1080, 2174.8, 457.9 )
 polygon = PoolVector2Array( 1788.69, 465.279, 1788.15, 474.465, 1601.18, 472.844, 1602.27, 209.688, 1818.41, 208.608, 1818.41, 216.173, 1607.67, 215.092, 1607.67, 353.424, 1724.39, 353.424, 1724.39, 356.666, 1607.67, 357.207, 1607.13, 466.359 )
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="KinematicBody2D"]
-occluder = SubResource( 3 )
+occluder = SubResource( 2 )
 __meta__ = {
 "_editor_description_": ""
 }
 
 [node name="Light2D" type="Light2D" parent="."]
 visible = false
-material = SubResource( 2 )
+material = SubResource( 3 )
 position = Vector2( 613.113, 498.283 )
 scale = Vector2( 0.223035, 0.223035 )
 texture = ExtResource( 3 )
