@@ -52,7 +52,7 @@ texture = ExtResource( 3 )
 
 [node name="twinkle1" type="AnimatedSprite" parent="sky/biggerstarrysky1"]
 frames = SubResource( 2 )
-frame = 9
+frame = 1
 playing = true
 
 [node name="twinkle2" type="AnimatedSprite" parent="sky/biggerstarrysky1"]
