@@ -26,7 +26,6 @@ shape = SubResource( 1 )
 [node name="WolfSprite" type="AnimatedSprite" parent="KinematicBody2D"]
 frames = SubResource( 2 )
 animation = "move"
-frame = 1
 playing = true
 
 [node name="Light2D" type="Light2D" parent="KinematicBody2D"]
