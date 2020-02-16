@@ -1,24 +1,153 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Wolf.tscn" type="PackedScene" id=1]
 [ext_resource path="res://platform_ish.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Heart.tscn" type="PackedScene" id=3]
-[ext_resource path="res://starryskies.tscn" type="PackedScene" id=4]
+[ext_resource path="res://starryskiesLESSLAG.tscn" type="PackedScene" id=4]
 [ext_resource path="res://audio/ambientSFX.wav" type="AudioStream" id=5]
-[ext_resource path="res://gimpassets/sunplaceholder.png" type="Texture" id=6]
+[ext_resource path="res://icon.png" type="Texture" id=6]
+[ext_resource path="res://Lighting/light.png" type="Texture" id=7]
+[ext_resource path="res://Photos/tree_wall.png" type="Texture" id=8]
+
+[sub_resource type="GDScript" id=6]
+script/source = "extends CPUParticles2D
+
+
+# Declare member variables here. Examples:
+# var a = 2
+# var b = \"text\"
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+#func _process(delta):
+#	pass
+"
+
+[sub_resource type="AtlasTexture" id=2]
+flags = 4
+atlas = ExtResource( 8 )
+
+[sub_resource type="Shader" id=3]
+code = "shader_type spatial;
+render_mode blend_mix,depth_draw_opaque,cull_back,diffuse_burley,specular_schlick_ggx;
+uniform vec4 albedo : hint_color;
+uniform sampler2D texture_albedo : hint_albedo;
+uniform float specular;
+uniform float metallic;
+uniform float roughness : hint_range(0,1);
+uniform float point_size : hint_range(0,128);
+uniform vec3 uv1_scale;
+uniform vec3 uv1_offset;
+uniform vec3 uv2_scale;
+uniform vec3 uv2_offset;
+
+
+void vertex() {
+	UV=UV*uv1_scale.xy+uv1_offset.xy;
+}
+
+
+
+
+void fragment() {
+	vec2 base_uv = UV;
+	vec4 albedo_tex = texture(texture_albedo,base_uv);
+	ALBEDO = albedo.rgb * albedo_tex.rgb;
+	METALLIC = metallic;
+	ROUGHNESS = roughness;
+	SPECULAR = specular;
+}
+"
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = SubResource( 3 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/specular = 0.5
+shader_param/metallic = 0.0
+shader_param/roughness = 1.0
+shader_param/point_size = 1.0
+shader_param/uv1_scale = Vector3( 1, 1, 1 )
+shader_param/uv1_offset = Vector3( 0, 0, 0 )
+shader_param/uv2_scale = Vector3( 1, 1, 1 )
+shader_param/uv2_offset = Vector3( 0, 0, 0 )
+
+[sub_resource type="CanvasItemMaterial" id=5]
+next_pass = SubResource( 4 )
+blend_mode = 1
+light_mode = 2
 
 [node name="GameLevel" type="Node2D"]
 
+[node name="fake flare" type="Light2D" parent="."]
+modulate = Color( 0.188235, 0.121569, 0.121569, 0.631373 )
+position = Vector2( 1589.79, 238.357 )
+scale = Vector2( 0.36, 0.36 )
+texture = ExtResource( 7 )
+offset = Vector2( -20, 20 )
+texture_scale = 0.69
+color = Color( 0.337255, 0.0980392, 0.0352941, 1 )
+energy = 3.7
+range_z_min = -2048
+range_z_max = 2048
+shadow_enabled = true
+shadow_color = Color( 0.0392157, 0.0313726, 0.0313726, 0 )
+
+[node name="fake2D3" type="Light2D" parent="fake flare"]
+position = Vector2( 180.132, -225.014 )
+scale = Vector2( 1, 1 )
+texture = ExtResource( 7 )
+offset = Vector2( -100, 100 )
+texture_scale = 0.4
+color = Color( 0.588235, 0.0784314, 0.0431373, 1 )
+energy = 3.51
+
+[node name="fake2D2" type="Light2D" parent="fake flare"]
+position = Vector2( -203.677, 286.625 )
+texture = ExtResource( 7 )
+offset = Vector2( -100, 100 )
+texture_scale = 1.65
+color = Color( 0.843137, 0.545098, 0.34902, 1 )
+energy = 1.8
+
 [node name="Wolf" parent="." instance=ExtResource( 1 )]
-position = Vector2( 462, 312 )
+position = Vector2( 760.956, 292.867 )
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Wolf"]
+show_behind_parent = true
+position = Vector2( 0, 2 )
+rotation = 1.5708
+amount = 10
+lifetime = 6.0
+preprocess = 0.23
+speed_scale = 6.89
+randomness = 0.26
+draw_order = 1
+texture = ExtResource( 7 )
+emission_shape = 2
+emission_rect_extents = Vector2( 10, 10 )
+direction = Vector2( 0, 0 )
+spread = 0.0
+gravity = Vector2( 0, 3 )
+scale_amount = 0.01
+color = Color( 0.0784314, 0.843137, 0.827451, 1 )
+script = SubResource( 6 )
 
 [node name="platform\?" parent="." instance=ExtResource( 2 )]
-position = Vector2( 471, 437 )
+position = Vector2( 500, 437 )
+rotation = -0.785398
+scale = Vector2( 2, 12 )
 
 [node name="KinematicBody2D" type="KinematicBody2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="KinematicBody2D"]
-polygon = PoolVector2Array( 20, -7.642, 20, 585, 1002, 585, 1002, -5.057, 1042.91, -5.05682, 1044.21, 620.443, -15.5258, 612.689, -11.6487, -17.9804 )
+position = Vector2( 208.954, 114.412 )
+scale = Vector2( 1.62665, 1.5461 )
+polygon = PoolVector2Array( 20, -7.642, 20, 98.851, 20, 585, 1002, 585, 1002, -5.057, 1042.91, -5.05682, 1044.21, 620.443, -15.5258, 612.689, -11.6487, -17.9804 )
 one_way_collision_margin = 0.0
 __meta__ = {
 "_editor_description_": ""
@@ -26,21 +155,38 @@ __meta__ = {
 
 [node name="Polygon2D" type="Polygon2D" parent="KinematicBody2D/CollisionPolygon2D"]
 color = Color( 0.164706, 0.152941, 0.152941, 1 )
+texture = SubResource( 2 )
 polygon = PoolVector2Array( 20, -7.642, 20, 585, 1002, 585, 1002, -5.057, 1042.91, -5.05682, 1044.21, 620.443, -15.5258, 612.689, -11.6487, -17.9804 )
 
 [node name="Node2D2" parent="." instance=ExtResource( 3 )]
-
-[node name="stars" parent="." instance=ExtResource( 4 )]
-visible = false
-show_behind_parent = true
-position = Vector2( 15.4868, 0 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
 autoplay = true
 
-[node name="sunplaceholder" type="Sprite" parent="."]
+[node name="Background" type="Node2D" parent="."]
+
+[node name="sunplaceholder" type="Sprite" parent="Background"]
 show_behind_parent = true
 position = Vector2( 1618.25, 187.93 )
-scale = Vector2( 3, 3 )
+scale = Vector2( 1.2, 1.2 )
 texture = ExtResource( 6 )
+offset = Vector2( 25, -25 )
+
+[node name="Light2D2" type="Light2D" parent="Background/sunplaceholder"]
+modulate = Color( 0.188235, 0.121569, 0.121569, 0.631373 )
+material = SubResource( 5 )
+position = Vector2( 25.728, -25.7281 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 7 )
+texture_scale = 0.3
+color = Color( 0.270588, 0.0352941, 0.0352941, 1 )
+energy = 12.1
+range_z_min = -2048
+range_z_max = 2048
+shadow_enabled = true
+shadow_color = Color( 0.0392157, 0.0313726, 0.0313726, 0 )
+
+[node name="StarsLESSLAG" parent="." instance=ExtResource( 4 )]
+show_behind_parent = true
+position = Vector2( -0.000244141, 0 )
