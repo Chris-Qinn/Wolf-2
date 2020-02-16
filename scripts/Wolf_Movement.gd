@@ -43,12 +43,16 @@ func _ready():
 func change_wolf(colour):
 	if colour == "white":
 		wolf = "white"
-	elif colour == "blue":
-		wolf = "blue"
+		$WolfSprite.animation = "white"
+	elif colour == "green":
+		wolf = "green"
+		$WolfSprite.animation = "green"
 	elif colour == "yellow":
 		wolf = "yellow"
+		$WolfSprite.animation = "yellow"
 	elif colour == "pink":
 		wolf = "pink"
+		$WolfSprite.animation = "pink"
 
 
 # Update controls somewhat
@@ -257,6 +261,8 @@ func _physics_process(delta):
 	elif state == "leftwalling" or state == "rightwalling":
 		# Only slide slightly
 		velocity.y = 0.5 * 30 * delta
+		velocity.x += acceleration.x * 1 * delta
+		velocity.x = min( max( -1.5, velocity.x ), 1.5 )
 	
 	if state != "grounded":
 		velocity.x *= 1.6
@@ -343,6 +349,8 @@ func _physics_process(delta):
 			else:
 				velocity.x = 0;
 				velocity.y = 0;
+	elif state == "rightwalling" or state == "leftwalling" or state == "grounded":
+		state = "falling"
 
 #	else:
 #		is_on_surface = false;

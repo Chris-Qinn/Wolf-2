@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/wolf-white.png-27c1e7203e083d7c1dae803a29ebf41e.stex"
+path="res://.import/ground_block.png-ed15aa9546cea0d65893adaa34c7421c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://wolf-white.png"
-dest_files=[ "res://.import/wolf-white.png-27c1e7203e083d7c1dae803a29ebf41e.stex" ]
+source_file="res://Photos/ground_block.png"
+dest_files=[ "res://.import/ground_block.png-ed15aa9546cea0d65893adaa34c7421c.stex" ]
 
 [params]
 

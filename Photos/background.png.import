@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/dirt_stackable_chunk-pixilart.png-e70c63a6957ff860e3f6ac8a5dd52a58.stex"
+path="res://.import/background.png-ea18fe1c4cce878784e186d03f55f31f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://dirt_stackable_chunk-pixilart.png"
-dest_files=[ "res://.import/dirt_stackable_chunk-pixilart.png-e70c63a6957ff860e3f6ac8a5dd52a58.stex" ]
+source_file="res://Photos/background.png"
+dest_files=[ "res://.import/background.png-ea18fe1c4cce878784e186d03f55f31f.stex" ]
 
 [params]
 

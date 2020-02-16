@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/grass_chunk-pixilart.png-81ce8a906d4540702da4b8465c112635.stex"
+path="res://.import/pixil-frame-0(1).png-b739d37d54b6c71a547e69993a8e458e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://grass_chunk-pixilart.png"
-dest_files=[ "res://.import/grass_chunk-pixilart.png-81ce8a906d4540702da4b8465c112635.stex" ]
+source_file="res://Photos/pixil-frame-0(1).png"
+dest_files=[ "res://.import/pixil-frame-0(1).png-b739d37d54b6c71a547e69993a8e458e.stex" ]
 
 [params]
 
