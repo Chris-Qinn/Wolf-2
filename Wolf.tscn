@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://pixil-frame-0(1).png" type="Texture" id=1]
-[ext_resource path="res://pixil-frame-1.png" type="Texture" id=2]
+[ext_resource path="res://Photos/pixil-frame-0(1).png" type="Texture" id=1]
+[ext_resource path="res://Photos/pixil-frame-1.png" type="Texture" id=2]
 [ext_resource path="res://scripts/Wolf_Movement.gd" type="Script" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -9,7 +9,7 @@ extents = Vector2( 11.9927, 12.3063 )
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
-"frames": [ ExtResource( 1 ), ExtResource( 2 ) ],
+"frames": [ ExtResource( 2 ), ExtResource( 1 ) ],
 "loop": true,
 "name": "move",
 "speed": 2.0
