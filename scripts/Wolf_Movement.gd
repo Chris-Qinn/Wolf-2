@@ -1,24 +1,30 @@
 extends KinematicBody2D
 
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
 var movespeed = 280
-var jumpvelocity = 10.0
-var gravityscale = 500.0
+var jumpvelocity = 5.0
+var gravity = 2.0
+
 var velocity = Vector2()
 var acceleration = Vector2()
-var is_on_surface;
-var surface_normal;
-var jump_buffer;
-var jumping;
-var hasdash;
-var wolf;
+var is_on_surface = false;
+var surface_normal = Vector2();
+var jump_buffer = 0;
+#var jumping;
+var hasdash = false;
 
-var on_ground
-var on_wall
-var on_ceil
+var state = "falling"
+var dash_buffer = 0
+var wolf = "white"
+var is_bouncy = false
+
+#var on_ground
+#var on_wall
+#var on_ceil
+
+var LRJoy = 0
+var UDJoy = 0
+var LRKey = 0
+var UDKey = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -28,147 +34,278 @@ func _ready():
 	acceleration.y = 2;
 	jump_buffer = 0;
 	hasdash = true;
-	on_ceil = false
-	on_ground = false
-	on_wall = false
+#	on_ceil = false
+#	on_ground = false
+#	on_wall = false
 
 
+# Put wolf changing animations in here :D
+func change_wolf(colour):
+	if colour == "white":
+		wolf = "white"
+	elif colour == "blue":
+		wolf = "blue"
+	elif colour == "yellow":
+		wolf = "yellow"
+	elif colour == "pink":
+		wolf = "pink"
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	passsdlf
-func get_dash_direction():
-	var dash_d = Vector2()
-	dash_d.x = Input.get_action_strength("right") - Input.get_action_strength("left")
-	dash_d.y = Input.get_action_strength("down") - Input.get_action_strength("up")
-	if dash_d.x == 0 and dash_d.y == 0:
-		if Input.is_action_pressed("key_right"):
-			dash_d.x += 1
-		if Input.is_action_pressed("key_left"):
-			dash_d.x -= 1
-		if Input.is_action_pressed("key_up"):
-			dash_d.y -= 1
-		if Input.is_action_pressed("key_down"):
-			dash_d.y += 1
-	return dash_d.normalized()
-
-func get_input():
-
-	var LRJoy = Input.get_action_strength("right") - Input.get_action_strength("left")
-	acceleration.x = LRJoy
-	var LRKey = 0
+# Update controls somewhat
+func controls():
+	# Set control variables
+	LRJoy = Input.get_action_strength("right") - Input.get_action_strength("left")
+	UDJoy = Input.get_action_strength("down") - Input.get_action_strength("up")
+	
+	LRKey = 0
 	if Input.is_action_pressed("key_right"):
 		LRKey += 1
-
 	if Input.is_action_pressed("key_left"):
 		LRKey -= 1
-	if LRJoy == 0:
-		acceleration.x = LRKey
-
-	if hasdash and Input.is_action_just_pressed("dash"):
-		var dash_d = get_dash_direction()
-		velocity = dash_d * 5;
-		hasdash = false
+	
+	UDKey = 0
+	if Input.is_action_pressed("key_up"):
+		UDKey -= 1
+	if Input.is_action_pressed("key_down"):
+		UDKey += 1
 	
 	if Input.is_action_pressed("bounce"):
-		wolf = "bounce";
+		is_bouncy = true
 	else:
-		wolf = "not";
+		is_bouncy = false
+
+
+# This gets the direction to dash in. Important because of multiple possible control schemes
+func get_dash_direction():
+	var dash_d = Vector2()
+	dash_d.x = LRJoy;
+	dash_d.y = 0;
+	if dash_d.x == 0 and dash_d.y == 0:
+		dash_d.x = LRKey;
+	return dash_d.normalized()
+
+
+# This executes the dash functionality, whether dash is just called or we are dashing
+func do_dash( delta ):
+	if state == "dashprepping":
+		dash_buffer -= delta
+		
+		# Do the dash
+		if dash_buffer <= 0.07:
+			state = "dashing"
+			
+			velocity = velocity.normalized()*5;
+			if velocity.x == 0 and get_dash_direction().x != 0:
+				dash_buffer = 0.05
+				velocity = 5*get_dash_direction();
+			elif get_dash_direction().x == velocity.x/5:
+				dash_buffer = 0.07
+			elif get_dash_direction().x == 0:
+				dash_buffer = 0.05
+			else:
+				dash_buffer = 0.03
+
+		return "not"
+
+	elif state == "dashing":
+		dash_buffer -= delta
+		if dash_buffer <= 0:
+			velocity = 1.5*velocity.normalized()
+			return "done"
+	else:
+		state = "dashprepping"
+		hasdash = false
+		var dash_d = get_dash_direction()
+		print(dash_d)
+		dash_buffer = 0.3
+		velocity = dash_d*0.001
+		return "not"
+
+
+# This executes a jump
+func do_jump():
+	state = "jumping"
+	velocity.y = -jumpvelocity;
+	jump_buffer = 0.15;
 	
-	if is_on_surface and (surface_normal.y < -0.5 or velocity.y == 0):
-		hasdash = true
-		if Input.is_action_just_pressed("jump"):
-			jumping = true
-			jump_buffer = 0.15;
-			velocity.y = -5;
-	elif Input.is_action_pressed("jump") and jump_buffer > 0:
-		jumping = true
-	else:
-		jumping = false
-		jump_buffer = 0
+
+
+# Does state control using variables
+func state_machine( delta ):
+
+	print(state)
+
+	if state == "bouncing":
+		if not is_bouncy:
+			state = "falling"
+			change_wolf( "white" )
+	
+	if state == "dashing" or state == "dashprepping":
+		if do_dash( delta ) == "done":
+			state = "falling"
+			print("Falling now?");
+
+	if hasdash and Input.is_action_just_pressed("dash"):
+		do_dash( delta )
+		change_wolf( "yellow" )
+	
+	if state == "falling" or state == "grounded":
+		if is_bouncy:
+			state = "bouncing"
+			change_wolf( "green" )
+	
+	if state == "grounded" and Input.is_action_just_pressed("jump"):
+		do_jump()
+		change_wolf( "white" )
+	elif state == "jumping":
+		if jump_buffer > 0 && Input.is_action_pressed("jump"):
+			jump_buffer -= delta
+		else:
+			state = "falling"
+#
+#
+#
+#	acceleration.x = LRJoy
+#
+#	if LRJoy == 0:
+#		acceleration.x = LRKey
+#
+#	if hasdash and Input.is_action_just_pressed("dash"):
+#		var dash_d = get_dash_direction()
+#		velocity = dash_d * 5;
+#		hasdash = false
+#
+#	if Input.is_action_pressed("bounce"):
+#		wolf = "bounce";
+#	else:
+#		wolf = "not";
+#
+#	if is_on_surface and (surface_normal.y < -0.5 or velocity.y == 0):
+#		hasdash = true
+#		if Input.is_action_just_pressed("jump"):
+#			jumping = true
+#			jump_buffer = 0.15;
+#			velocity.y = -jumpvelocity;
+#	elif Input.is_action_pressed("jump") and jump_buffer > 0:
+#		jumping = true
+#	else:
+#		jumping = false
+#		jump_buffer = 0
 
 
 func _physics_process(delta):
 
 	# Define some states that help us figure out what we're doing
-	on_ground = is_on_surface and (surface_normal.y < -0.5)
-	on_wall = is_on_surface and (abs(surface_normal.y) <= 0.5)
-	on_ceil = is_on_surface and not on_wall and not on_ground
-	
+#	on_ground = is_on_surface and (surface_normal.y < -0.5)
+#	on_wall = is_on_surface and (abs(surface_normal.y) <= 0.5)
+#	on_ceil = is_on_surface and not on_wall and not on_ground
 
-	get_input()
+	controls()
+
+	state_machine( delta )
 	
-	if jumping:
-		pass
+	if LRJoy == 0:
+		acceleration.x = LRKey
 	else:
-		velocity.y += acceleration.y*30*delta
+		acceleration.x = LRJoy
 	
-	if jump_buffer > 0:
-		jump_buffer -= delta;
-		# print(jump_buffer)
+	acceleration.y = gravity
 	
-	# velocity.y = min(velocity.y, 5)
-	
-	
-	var v_x_limit = max(1.5*Input.get_action_strength("left"), 1.5*Input.get_action_strength("right"))
-	if Input.is_action_pressed("key_left") or Input.is_action_pressed("key_right"):
-		v_x_limit = 1.5;
-	
-	
-	# Control velocity and acceleration in the x-axis
-	if on_ground and acceleration.x == 0:
-		# On the ground and not trying to accelerate
-		acceleration.x = -0.2*velocity.x
+	if state == "bouncing":
+		# X-velocity stays the same
+		velocity.y += acceleration.y * 30 * delta
+	elif state == "jumping":
+		# Y-velocity stays the same
 		velocity.x += acceleration.x * 30 * delta
-	elif abs(velocity.x) > v_x_limit and ( 
-		(velocity.x<0 and acceleration.x<0) or (velocity.x>0 and acceleration.x>0)
-		):
-		# Cannot accelerate any faster
+		velocity.x = min( max( -1.5, velocity.x ), 1.5 )
+	elif state == "dashing" or state == "dashprepping":
+		# No change in velocities
 		pass
-	elif on_ground:
-		velocity.x += acceleration.x*30*delta
-		velocity.x = min( max( -v_x_limit, velocity.x ), v_x_limit )
-	elif wolf != "bounce":
-		velocity.x += acceleration.x*30*delta
-		velocity.x = min( max( -v_x_limit, velocity.x ), v_x_limit )
+	elif state == "falling" or state == "grounded":
+		if state == "grounded":
+			acceleration.x += -0.3 * velocity.x
+		velocity.x += acceleration.x * 30 * delta
+		velocity.x = min( max( -1.5, velocity.x ), 1.5 )
+		velocity.y += acceleration.y * 30 * delta
+	
+	if state != "grounded":
+		velocity.x *= 1.6
+	
+	var motion = delta * velocity * movespeed
+	
+	if state != "grounded":
+		velocity.x /= 1.6
+	
+	
+	
+	
+	
+	
+#	var v_x_limit = max(1.5*Input.get_action_strength("left"), 1.5*Input.get_action_strength("right"))
+#	if Input.is_action_pressed("key_left") or Input.is_action_pressed("key_right"):
+#		v_x_limit = 1.5;
+#
+#
+#	# Control velocity and acceleration in the x-axis
+#	if on_ground and acceleration.x == 0:
+#		# On the ground and not trying to accelerate
+#		acceleration.x = -0.2*velocity.x
+#		velocity.x += acceleration.x * 30 * delta
+#	elif abs(velocity.x) > v_x_limit and ( 
+#		(velocity.x<0 and acceleration.x<0) or (velocity.x>0 and acceleration.x>0)
+#		):
+#		# Cannot accelerate any faster
+#		pass
+#	elif on_ground:
+#		velocity.x += acceleration.x*30*delta
+#		velocity.x = min( max( -v_x_limit, velocity.x ), v_x_limit )
+#	elif wolf != "bounce":
+#		velocity.x += acceleration.x*30*delta
+#		velocity.x = min( max( -v_x_limit, velocity.x ), v_x_limit )
 
 
 	
-	if on_ground == false:
-		velocity.x *= 1.8
-	else:
-		velocity.x *= 1.2
-	
-	var motion = velocity*delta*movespeed
-	
-	if on_ground == false:
-		velocity.x /= 1.8
-	else:
-		velocity.x /= 1.2
+#	if on_ground == false:
+#		velocity.x *= 1.8
+#	else:
+#		velocity.x *= 1.2
+#
+#	var motion = velocity*delta*movespeed
+#
+#	if on_ground == false:
+#		velocity.x /= 1.8
+#	else:
+#		velocity.x /= 1.2
 
 	var collision = move_and_collide(motion)
 	if collision:
-		is_on_surface = true;
+#		is_on_surface = true;
 		surface_normal = collision.normal
 		
-		if wolf == "bounce":
+		# Check if this is ground enough to give dash back
+		if collision.normal.y < -0.5:
+			hasdash = true
+		
+		# If we are bouncy
+		# Works even in the middle of a dash
+		if is_bouncy:
 			var bounce = collision.remainder.bounce(collision.normal);
 			velocity = velocity.bounce(collision.normal);
 			velocity *= 0.95
+			if state != "bouncing":
+				state = "bouncing"
+				change_wolf( "green" )
 			#move_and_collide(bounce)
 		else:
 			if collision.normal.y < -0.5:
 				velocity.y = 0;
+				state = "grounded"
 			var slide = collision.remainder.slide(collision.normal);
 			velocity = velocity.slide(collision.normal)
 			move_and_collide(slide)
 
-		surface_normal = collision.normal
-		if collision.normal.y > 0.5:
-			jump_buffer = 0;
-	else:
-		is_on_surface = false;
+#	else:
+#		is_on_surface = false;
 	
 	if velocity.x > 0:
 		$"WolfSprite".flip_h = false;
