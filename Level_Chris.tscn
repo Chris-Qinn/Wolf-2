@@ -56,92 +56,101 @@ position = Vector2( 622.017, 529.984 )
 position = Vector2( 593.232, 529.855 )
 
 [node name="Node2D21" parent="." index="13" instance=ExtResource( 5 )]
-position = Vector2( 564.185, 529.868 )
+position = Vector2( 561.415, 529.868 )
 
-[node name="Node2D16" parent="." index="14" instance=ExtResource( 5 )]
+[node name="Node2D23" parent="." index="14" instance=ExtResource( 5 )]
+position = Vector2( 338.122, 529.758 )
+
+[node name="Node2D24" parent="." index="15" instance=ExtResource( 5 )]
+position = Vector2( 362.564, 529.758 )
+
+[node name="Node2D25" parent="." index="16" instance=ExtResource( 5 )]
+position = Vector2( 398.179, 529.409 )
+
+[node name="Node2D16" parent="." index="17" instance=ExtResource( 5 )]
 position = Vector2( 598.441, 273.138 )
 
-[node name="Node2D17" parent="." index="15" instance=ExtResource( 5 )]
+[node name="Node2D17" parent="." index="18" instance=ExtResource( 5 )]
 position = Vector2( 563.156, 273.565 )
 
-[node name="Node2D10" parent="." index="16" instance=ExtResource( 5 )]
+[node name="Node2D10" parent="." index="19" instance=ExtResource( 5 )]
 position = Vector2( 810.072, 273.62 )
 
-[node name="Node2D11" parent="." index="17" instance=ExtResource( 5 )]
+[node name="Node2D11" parent="." index="20" instance=ExtResource( 5 )]
 position = Vector2( 774.277, 272.785 )
 
-[node name="icon" type="Sprite" parent="." index="18"]
+[node name="icon" type="Sprite" parent="." index="21"]
 position = Vector2( 67.572, 482.021 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 6 )
 
-[node name="Node2D12" parent="." index="19" instance=ExtResource( 5 )]
+[node name="Node2D12" parent="." index="22" instance=ExtResource( 5 )]
 position = Vector2( 844.636, 274.003 )
 
-[node name="Node2D2" parent="." index="20"]
+[node name="Node2D2" parent="." index="23"]
 position = Vector2( 341.097, 300.963 )
 colour = "yellow"
 
-[node name="Node2D20" parent="." index="21" instance=ExtResource( 7 )]
+[node name="Node2D20" parent="." index="24" instance=ExtResource( 7 )]
 position = Vector2( 7.36069, 156.913 )
 scale = Vector2( 0.2, 0.3 )
 
-[node name="Node2D22" parent="." index="22" instance=ExtResource( 8 )]
+[node name="Node2D22" parent="." index="25" instance=ExtResource( 8 )]
 position = Vector2( 360.78, 290.354 )
 scale = Vector2( 0.2, 0.2 )
 
-[node name="Node2D26" parent="." index="23" instance=ExtResource( 8 )]
+[node name="Node2D26" parent="." index="26" instance=ExtResource( 8 )]
 position = Vector2( 318.813, 289.903 )
 scale = Vector2( 0.2, 0.2 )
 
-[node name="Node2D27" parent="." index="24" instance=ExtResource( 8 )]
+[node name="Node2D27" parent="." index="27" instance=ExtResource( 8 )]
 position = Vector2( 351.382, 97.8319 )
 scale = Vector2( 0.2, 0.2 )
 
-[node name="Node2D28" parent="." index="25" instance=ExtResource( 8 )]
+[node name="Node2D28" parent="." index="28" instance=ExtResource( 8 )]
 position = Vector2( 307.957, 98.6671 )
 scale = Vector2( 0.2, 0.2 )
 
-[node name="Node2D29" parent="." index="26" instance=ExtResource( 8 )]
+[node name="Node2D29" parent="." index="29" instance=ExtResource( 8 )]
 position = Vector2( 619.641, 163.259 )
 scale = Vector2( 0.2, 0.2 )
 
-[node name="Node2D30" parent="." index="27" instance=ExtResource( 4 )]
+[node name="Node2D30" parent="." index="30" instance=ExtResource( 4 )]
 position = Vector2( 874.54, 502.946 )
 scale = Vector2( 0.05, 0.05 )
 
-[node name="Node2D32" parent="." index="28" instance=ExtResource( 4 )]
+[node name="Node2D32" parent="." index="31" instance=ExtResource( 4 )]
 position = Vector2( 866.177, 503.155 )
 scale = Vector2( 0.05, 0.05 )
 
-[node name="Node2D33" parent="." index="29" instance=ExtResource( 4 )]
+[node name="Node2D33" parent="." index="32" instance=ExtResource( 4 )]
 position = Vector2( 880.812, 502.527 )
 scale = Vector2( 0.05, 0.05 )
 
-[node name="Node2D34" parent="." index="30" instance=ExtResource( 4 )]
+[node name="Node2D34" parent="." index="33" instance=ExtResource( 4 )]
 position = Vector2( 860.3, 501.11 )
 scale = Vector2( 0.05, 0.05 )
 
-[node name="Node2D36" parent="." index="31" instance=ExtResource( 4 )]
+[node name="Node2D36" parent="." index="34" instance=ExtResource( 4 )]
 position = Vector2( 706.407, 502.59 )
 scale = Vector2( 0.05, 0.05 )
 
-[node name="Node2D37" parent="." index="32" instance=ExtResource( 4 )]
+[node name="Node2D37" parent="." index="35" instance=ExtResource( 4 )]
 position = Vector2( 708.801, 498.21 )
 scale = Vector2( 0.05, 0.05 )
 
-[node name="Node2D38" parent="." index="33" instance=ExtResource( 4 )]
+[node name="Node2D38" parent="." index="36" instance=ExtResource( 4 )]
 position = Vector2( 688.83, 498.064 )
 scale = Vector2( 0.05, 0.05 )
 
-[node name="Node2D39" parent="." index="34" instance=ExtResource( 4 )]
+[node name="Node2D39" parent="." index="37" instance=ExtResource( 4 )]
 position = Vector2( 701.02, 503.363 )
 scale = Vector2( 0.05, 0.05 )
 
-[node name="Node2D31" parent="." index="35" instance=ExtResource( 4 )]
+[node name="Node2D31" parent="." index="38" instance=ExtResource( 4 )]
 position = Vector2( 870.397, 495.006 )
 scale = Vector2( 0.1, 0.1 )
 
-[node name="Node2D35" parent="." index="36" instance=ExtResource( 4 )]
+[node name="Node2D35" parent="." index="39" instance=ExtResource( 4 )]
 position = Vector2( 697.922, 493.751 )
 scale = Vector2( 0.1, 0.1 )
