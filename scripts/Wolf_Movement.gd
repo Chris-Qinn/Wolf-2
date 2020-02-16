@@ -94,16 +94,20 @@ func do_dash( delta ):
 		if dash_buffer <= 0.07:
 			state = "dashing"
 			
+			var h = load("res://Heart.tscn").instance()
+			h.position = get_position() + get_parent().get_position()
+			get_node("/root").add_child(h)
+			
 			velocity = velocity.normalized()*5;
 			if velocity.x == 0 and get_dash_direction().x != 0:
-				dash_buffer = 0.05
+				dash_buffer = 0.04
 				velocity = 5*get_dash_direction();
 			elif get_dash_direction().x == velocity.x/5:
 				dash_buffer = 0.07
 			elif get_dash_direction().x == 0:
-				dash_buffer = 0.05
+				dash_buffer = 0.07
 			else:
-				dash_buffer = 0.03
+				dash_buffer = 0.04
 
 		return "not"
 
@@ -133,7 +137,7 @@ func do_jump():
 # Does state control using variables
 func state_machine( delta ):
 
-	print(state)
+	# print(state)
 
 	if state == "bouncing":
 		if not is_bouncy:
