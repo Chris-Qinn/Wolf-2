@@ -133,6 +133,14 @@ func do_jump():
 	jump_buffer = 0.15;
 	
 
+# This executes a wall jump
+func do_wall_jump(x):
+	state = "jumping"
+	velocity.x = x
+	velocity.y = -1
+	velocity = jumpvelocity*velocity.normalized()
+	jump_buffer = 0.10;
+
 
 # Does state control using variables
 func state_machine( delta ):
@@ -165,6 +173,18 @@ func state_machine( delta ):
 		if jump_buffer > 0 && Input.is_action_pressed("jump"):
 			jump_buffer -= delta
 		else:
+			state = "falling"
+	
+	if state == "rightwalling":
+		if Input.is_action_just_pressed("jump"):
+			do_wall_jump(-1.0);
+		elif LRJoy <= 0 and LRKey <= 0:
+			state = "falling"
+	
+	if state == "leftwalling":
+		if Input.is_action_just_pressed("jump"):
+			do_wall_jump(1.0);
+		elif LRJoy >= 0 and LRKey >= 0:
 			state = "falling"
 #
 #
@@ -217,6 +237,8 @@ func _physics_process(delta):
 	
 	if state == "bouncing":
 		# X-velocity stays the same
+		velocity.x += acceleration.x * 5 * delta
+		velocity.x = min( max( -1.5, velocity.x ), 1.5 )
 		velocity.y += acceleration.y * 30 * delta
 	elif state == "jumping":
 		# Y-velocity stays the same
@@ -231,6 +253,10 @@ func _physics_process(delta):
 		velocity.x += acceleration.x * 30 * delta
 		velocity.x = min( max( -1.5, velocity.x ), 1.5 )
 		velocity.y += acceleration.y * 30 * delta
+	
+	elif state == "leftwalling" or state == "rightwalling":
+		# Only slide slightly
+		velocity.y = 0.5 * 30 * delta
 	
 	if state != "grounded":
 		velocity.x *= 1.6
@@ -304,9 +330,19 @@ func _physics_process(delta):
 			if collision.normal.y < -0.5:
 				velocity.y = 0;
 				state = "grounded"
-			var slide = collision.remainder.slide(collision.normal);
-			velocity = velocity.slide(collision.normal)
-			move_and_collide(slide)
+			elif collision.normal.x == 1:
+				state = "leftwalling"
+				change_wolf( "pink" )
+			elif collision.normal.x == -1:
+				state = "rightwalling"
+				change_wolf( "pink" )
+			if collision.normal.x != 1 and collision.normal.x != -1:
+				var slide = collision.remainder.slide(collision.normal);
+				velocity = velocity.slide(collision.normal)
+				move_and_collide(slide)
+			else:
+				velocity.x = 0;
+				velocity.y = 0;
 
 #	else:
 #		is_on_surface = false;

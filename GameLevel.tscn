@@ -28,8 +28,12 @@ __meta__ = {
 color = Color( 0.164706, 0.152941, 0.152941, 1 )
 polygon = PoolVector2Array( 20, -7.642, 20, 585, 1002, 585, 1002, -5.057, 1042.91, -5.05682, 1044.21, 620.443, -15.5258, 612.689, -11.6487, -17.9804 )
 
-[node name="Node2D" parent="." instance=ExtResource( 3 )]
+[node name="Node2D2" parent="." instance=ExtResource( 3 )]
+
+[node name="stars" parent="." instance=ExtResource( 4 )]
+visible = false
 show_behind_parent = true
+position = Vector2( 15.4868, 0 )
 
 [node name="stars" parent="." instance=ExtResource( 4 )]
 show_behind_parent = true
