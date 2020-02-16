@@ -5,7 +5,7 @@
 [ext_resource path="res://Heart.tscn" type="PackedScene" id=3]
 [ext_resource path="res://starryskiesLESSLAG.tscn" type="PackedScene" id=4]
 [ext_resource path="res://audio/ambientSFX.wav" type="AudioStream" id=5]
-[ext_resource path="res://icon.png" type="Texture" id=6]
+[ext_resource path="res://noticon.png" type="Texture" id=6]
 [ext_resource path="res://Lighting/light.png" type="Texture" id=7]
 [ext_resource path="res://Photos/tree_wall.png" type="Texture" id=8]
 [ext_resource path="res://mytiles.tscn" type="PackedScene" id=9]
@@ -85,7 +85,8 @@ light_mode = 2
 
 [node name="fake flare" type="Light2D" parent="."]
 modulate = Color( 0.188235, 0.121569, 0.121569, 0.631373 )
-position = Vector2( 1589.79, 238.357 )
+position = Vector2( 1588.21, 235.11 )
+rotation = 0.0349066
 scale = Vector2( 0.36, 0.36 )
 texture = ExtResource( 7 )
 offset = Vector2( -20, 20 )
@@ -106,7 +107,7 @@ color = Color( 0.588235, 0.0784314, 0.0431373, 1 )
 energy = 3.51
 
 [node name="fake2D2" type="Light2D" parent="fake flare"]
-position = Vector2( -203.677, 286.625 )
+position = Vector2( -144.928, 350.528 )
 texture = ExtResource( 7 )
 offset = Vector2( -100, 100 )
 texture_scale = 1.65
@@ -192,3 +193,11 @@ shadow_color = Color( 0.0392157, 0.0313726, 0.0313726, 0 )
 visible = false
 show_behind_parent = true
 position = Vector2( -0.000244141, 0 )
+
+[node name="Node2D" parent="." instance=ExtResource( 9 )]
+position = Vector2( 1692.9, 223.641 )
+
+[node name="Node2D3" parent="." instance=ExtResource( 10 )]
+show_behind_parent = true
+position = Vector2( 1330.3, 934.821 )
+scale = Vector2( 0.5, 0.5 )
