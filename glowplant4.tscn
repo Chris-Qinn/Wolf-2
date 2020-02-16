@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Photos/alien_plant_3.png" type="Texture" id=1]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 1.16632, 0.583179 )
+scale = Vector2( 0.768275, 0.817601 )
+texture = ExtResource( 1 )
