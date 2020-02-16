@@ -1,19 +1,22 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://Photos/pixil-frame-0(1).png" type="Texture" id=1]
-[ext_resource path="res://Photos/pixil-frame-1.png" type="Texture" id=2]
+[ext_resource path="res://Wolf.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scripts/Wolf_Movement.gd" type="Script" id=3]
+[ext_resource path="res://Lighting/light.png" type="Texture" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 11.9927, 12.3063 )
 
-[sub_resource type="SpriteFrames" id=2]
-animations = [ {
-"frames": [ ExtResource( 2 ), ExtResource( 1 ) ],
-"loop": true,
-"name": "move",
-"speed": 2.0
-} ]
+[sub_resource type="CanvasItemMaterial" id=2]
+light_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id=4]
+blend_mode = 1
+light_mode = 2
+particles_animation = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
 
 [node name="Node2D" type="Node2D"]
 
@@ -24,12 +27,22 @@ script = ExtResource( 3 )
 shape = SubResource( 1 )
 
 [node name="WolfSprite" type="AnimatedSprite" parent="KinematicBody2D"]
-frames = SubResource( 2 )
-animation = "move"
+material = SubResource( 2 )
+scale = Vector2( 0.389014, 0.389014 )
+frames = ExtResource( 1 )
+animation = "white"
 playing = true
 
-[node name="Light2D" type="Light2D" parent="KinematicBody2D"]
-position = Vector2( -0.0325127, 0.0554707 )
-scale = Vector2( 0.0118082, 24.4839 )
-texture_scale = 29.33
+[node name="Polygon2D" type="Polygon2D" parent="KinematicBody2D/WolfSprite"]
+visible = false
+self_modulate = Color( 1, 1, 1, 0.509804 )
+show_behind_parent = true
+material = SubResource( 4 )
+polygon = PoolVector2Array( -36.8428, -26.6318, -36.8428, -18.4209, -43.0564, -18.4209, -55.2618, -8.21281, -58.1467, 22.4115, -53.4865, 29.9566, -36.8428, 36.1703, -34.6236, 40.3867, 38.3865, 39.9428, 38.8304, -27.2975, 33.5044, -28.8509, 33.2825, -46.1603, 27.2908, -45.4946, 11.9786, -30.4044, -2.66782, -28.8509, -6.6623, -38.3933, -17.7581, -44.6069, -23.9717, -45.4946, -28.1881, -29.7386 )
+
+[node name="Light2D" type="Light2D" parent="KinematicBody2D/WolfSprite"]
+show_behind_parent = true
+texture = ExtResource( 6 )
+texture_scale = 1.5
+energy = 1.53
 shadow_enabled = true

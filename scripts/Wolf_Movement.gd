@@ -17,6 +17,8 @@ var dash_buffer = 0
 var wolf = "white"
 var is_bouncy = false
 
+var has_colours = ["white"]
+
 #var on_ground
 #var on_wall
 #var on_ceil
@@ -43,12 +45,16 @@ func _ready():
 func change_wolf(colour):
 	if colour == "white":
 		wolf = "white"
-	elif colour == "blue":
-		wolf = "blue"
-	elif colour == "yellow":
+		$WolfSprite.animation = "white"
+	elif colour == "green" and "green" in has_colours:
+		wolf = "green"
+		$WolfSprite.animation = "green"
+	elif colour == "yellow" and "yellow" in has_colours:
 		wolf = "yellow"
-	elif colour == "pink":
+		$WolfSprite.animation = "yellow"
+	elif colour == "pink" and "pink" in has_colours:
 		wolf = "pink"
+		$WolfSprite.animation = "pink"
 
 
 # Update controls somewhat
@@ -157,12 +163,12 @@ func state_machine( delta ):
 			state = "falling"
 			print("Falling now?");
 
-	if hasdash and Input.is_action_just_pressed("dash"):
+	if hasdash and Input.is_action_just_pressed("dash") and "yellow" in has_colours:
 		do_dash( delta )
 		change_wolf( "yellow" )
 	
 	if state == "falling" or state == "grounded":
-		if is_bouncy:
+		if is_bouncy and "green" in has_colours:
 			state = "bouncing"
 			change_wolf( "green" )
 	
@@ -257,6 +263,8 @@ func _physics_process(delta):
 	elif state == "leftwalling" or state == "rightwalling":
 		# Only slide slightly
 		velocity.y = 0.5 * 30 * delta
+		velocity.x += acceleration.x * 1 * delta
+		velocity.x = min( max( -1.5, velocity.x ), 1.5 )
 	
 	if state != "grounded":
 		velocity.x *= 1.6
@@ -318,7 +326,7 @@ func _physics_process(delta):
 		
 		# If we are bouncy
 		# Works even in the middle of a dash
-		if is_bouncy:
+		if is_bouncy and "green" in has_colours:
 			var bounce = collision.remainder.bounce(collision.normal);
 			velocity = velocity.bounce(collision.normal);
 			velocity *= 0.95
@@ -330,19 +338,21 @@ func _physics_process(delta):
 			if collision.normal.y < -0.5:
 				velocity.y = 0;
 				state = "grounded"
-			elif collision.normal.x == 1:
+			elif collision.normal.x == 1 and "pink" in has_colours:
 				state = "leftwalling"
 				change_wolf( "pink" )
-			elif collision.normal.x == -1:
+			elif collision.normal.x == -1 and "pink" in has_colours:
 				state = "rightwalling"
 				change_wolf( "pink" )
-			if collision.normal.x != 1 and collision.normal.x != -1:
+			if (collision.normal.x != 1 and collision.normal.x != -1) or not "pink" in has_colours:
 				var slide = collision.remainder.slide(collision.normal);
 				velocity = velocity.slide(collision.normal)
 				move_and_collide(slide)
 			else:
 				velocity.x = 0;
 				velocity.y = 0;
+	elif state == "rightwalling" or state == "leftwalling" or state == "grounded":
+		state = "falling"
 
 #	else:
 #		is_on_surface = false;
