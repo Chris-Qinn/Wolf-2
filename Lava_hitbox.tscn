@@ -1,13 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://scripts/Area2D.gd" type="Script" id=1]
-[ext_resource path="res://Lighting/light.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 18, 18 )
-
-[sub_resource type="CanvasItemMaterial" id=2]
-blend_mode = 1
 
 [node name="Node2D" type="Node2D"]
 
@@ -16,13 +12,4 @@ script = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 1 )
-
-[node name="Light2D" type="Light2D" parent="."]
-material = SubResource( 2 )
-position = Vector2( 1.46341, -6.06276 )
-scale = Vector2( 9.86055, 2.83744 )
-texture = ExtResource( 2 )
-texture_scale = 0.01
-color = Color( 0.815686, 0.32549, 0.0862745, 1 )
-energy = 2.55
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_on_Area2D_body_entered"]

@@ -18,15 +18,15 @@ animations = [ {
 "name": "pink",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 3 ) ],
-"loop": true,
-"name": "yellow",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 1 ) ],
 "loop": true,
 "name": "white",
 "speed": 2.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "yellow",
+"speed": 5.0
 }, {
 "frames": [ ExtResource( 5 ) ],
 "loop": true,

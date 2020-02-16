@@ -1,6 +1,7 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Wolf.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://miniWolf.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scripts/Wolf_Movement.gd" type="Script" id=3]
 [ext_resource path="res://Lighting/light.png" type="Texture" id=6]
 
@@ -47,3 +48,37 @@ texture = ExtResource( 6 )
 texture_scale = 1.5
 energy = 1.53
 shadow_enabled = true
+
+[node name="M1" parent="WolfBody/WolfSprite" instance=ExtResource( 2 )]
+position = Vector2( 8.69565, 17.3913 )
+scale = Vector2( 8.69565, 8.69565 )
+
+[node name="M2" parent="WolfBody/WolfSprite" instance=ExtResource( 2 )]
+position = Vector2( 8.69565, 17.3913 )
+scale = Vector2( 8.69565, 8.69565 )
+
+[node name="M3" parent="WolfBody/WolfSprite" instance=ExtResource( 2 )]
+position = Vector2( 8.69565, 17.3913 )
+scale = Vector2( 8.69565, 8.69565 )
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="WolfBody"]
+show_behind_parent = true
+position = Vector2( 0, 2 )
+emitting = false
+amount = 14
+lifetime = 3.0
+preprocess = 0.23
+speed_scale = 6.89
+lifetime_randomness = 0.98
+local_coords = false
+draw_order = 1
+texture = ExtResource( 6 )
+emission_shape = 2
+emission_rect_extents = Vector2( 10, 1 )
+spread = 0.0
+gravity = Vector2( 0, 8 )
+scale_amount = 0.01
+color = Color( 0.0784314, 0.843137, 0.827451, 1 )
+__meta__ = {
+"_editor_description_": ""
+}
