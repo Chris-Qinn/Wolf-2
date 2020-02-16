@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://gimpassets/starrysky.png" type="Texture" id=1]
+
+[node name="ParallaxBackground" type="ParallaxBackground"]
+
+[node name="starrysky" type="Sprite" parent="."]
+position = Vector2( 958.486, 540.967 )
+texture = ExtResource( 1 )
