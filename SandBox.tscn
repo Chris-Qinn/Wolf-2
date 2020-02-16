@@ -1,3 +1,116 @@
-[gd_scene format=2]
+[gd_scene load_steps=7 format=2]
 
-[node name="Node2D" type="Node2D"]
+[ext_resource path="res://gimpassets/Mock_Level.png" type="Texture" id=1]
+[ext_resource path="res://Wolf.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Lighting/light.png" type="Texture" id=3]
+
+[sub_resource type="Environment" id=1]
+background_mode = 4
+ambient_light_color = Color( 1, 1, 1, 1 )
+glow_enabled = true
+glow_intensity = 2.06
+glow_strength = 0.46
+glow_bloom = 0.1
+glow_blend_mode = 0
+glow_hdr_threshold = 0.93
+adjustment_enabled = true
+
+[sub_resource type="OccluderPolygon2D" id=2]
+polygon = PoolVector2Array( 1784.71, 482.925, 1580.17, 482.925, 1584.07, 184.879, 1841.21, 198.515, 1823.67, 225.787, 1628.87, 239.423, 1623.03, 336.824, 1755.49, 348.512, 1751.6, 371.888, 1617.18, 377.732, 1617.18, 440.069, 1815.88, 440.069 )
+
+[sub_resource type="CanvasItemMaterial" id=3]
+blend_mode = 1
+
+[node name="SandBoxLevel" type="Node2D"]
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+centered = false
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 1 )
+
+[node name="KinematicBody2D" type="KinematicBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="KinematicBody2D"]
+polygon = PoolVector2Array( 258.167, 414.569, 407.393, 414.569, 327.504, 432.657 )
+one_way_collision = true
+one_way_collision_margin = 0.0
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="KinematicBody2D"]
+polygon = PoolVector2Array( 0.170746, 476.139, 67.7158, 476.139, 30.4309, 484.245 )
+one_way_collision = true
+
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="KinematicBody2D"]
+position = Vector2( 0.721802, 184.772 )
+polygon = PoolVector2Array( 0.170746, 476.139, 110.438, 476.514, 30.4309, 484.245 )
+one_way_collision = true
+
+[node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="KinematicBody2D"]
+position = Vector2( 0.721802, 370.48 )
+polygon = PoolVector2Array( 0.170746, 476.139, 143.808, 476.144, 30.4309, 484.245 )
+one_way_collision = true
+
+[node name="CollisionPolygon2D6" type="CollisionPolygon2D" parent="KinematicBody2D"]
+position = Vector2( 460.823, 388.245 )
+polygon = PoolVector2Array( 1.1774, 474.055, 449.577, 474.055, 221.577, 608.955 )
+one_way_collision = true
+
+[node name="CollisionPolygon2D7" type="CollisionPolygon2D" parent="KinematicBody2D"]
+position = Vector2( 766.723, 389.195 )
+polygon = PoolVector2Array( 230.127, 474.055, 449.577, 474.055, 333.677, 542.455 )
+one_way_collision = true
+
+[node name="CollisionPolygon2D12" type="CollisionPolygon2D" parent="KinematicBody2D"]
+position = Vector2( 1263.62, 173.535 )
+polygon = PoolVector2Array( 73.3079, 470.92, 452.267, 471.866, 72.856, 476.255, -23.2161, 568.913 )
+one_way_collision_margin = 0.0
+
+[node name="CollisionPolygon2D11" type="CollisionPolygon2D" parent="KinematicBody2D"]
+position = Vector2( 1005.56, 483.066 )
+polygon = PoolVector2Array( 284.719, 474.088, 449.577, 474.055, 373.617, 520.527 )
+one_way_collision = true
+
+[node name="CollisionPolygon2D8" type="CollisionPolygon2D" parent="KinematicBody2D"]
+position = Vector2( 340.173, 148.845 )
+polygon = PoolVector2Array( 230.127, 474.055, 396.377, 474.055, 322.277, 527.255 )
+one_way_collision = true
+
+[node name="CollisionPolygon2D9" type="CollisionPolygon2D" parent="KinematicBody2D"]
+position = Vector2( 362.939, -169.32 )
+polygon = PoolVector2Array( 230.127, 474.055, 396.377, 474.055, 322.277, 527.255 )
+one_way_collision = true
+
+[node name="CollisionPolygon2D5" type="CollisionPolygon2D" parent="KinematicBody2D"]
+position = Vector2( 3.81903, 604.005 )
+polygon = PoolVector2Array( 0, 475, 1920, 475, 30.4309, 484.245 )
+one_way_collision = true
+
+[node name="CollisionPolygon2D10" type="CollisionPolygon2D" parent="KinematicBody2D"]
+polygon = PoolVector2Array( 907.307, 1076.32, 909.891, 353.894, 1105.04, 356.478, 1103.74, 365.525, 915.061, 365.525, 917.646, 481.837, 1366.09, 481.837, 1366.09, 489.591, 915.061, 490.883 )
+
+[node name="CollisionPolygon2D14" type="CollisionPolygon2D" parent="KinematicBody2D"]
+polygon = PoolVector2Array( 1920, 0, 1920, 1080, 2174.8, 457.9 )
+
+[node name="CollisionPolygon2D13" type="CollisionPolygon2D" parent="KinematicBody2D"]
+polygon = PoolVector2Array( 1788.69, 465.279, 1788.15, 474.465, 1601.18, 472.844, 1602.27, 209.688, 1818.41, 208.608, 1818.41, 216.173, 1607.67, 215.092, 1607.67, 353.424, 1724.39, 353.424, 1724.39, 356.666, 1607.67, 357.207, 1607.13, 466.359 )
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="KinematicBody2D"]
+occluder = SubResource( 2 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Light2D" type="Light2D" parent="."]
+visible = false
+material = SubResource( 3 )
+position = Vector2( 613.113, 498.283 )
+scale = Vector2( 0.223035, 0.223035 )
+texture = ExtResource( 3 )
+color = Color( 0.941176, 0.952941, 0.913725, 1 )
+energy = 3.73
+range_height = 2.4
+shadow_enabled = true
+
+[node name="Node2D" parent="." instance=ExtResource( 2 )]
+position = Vector2( 109.418, 960.19 )

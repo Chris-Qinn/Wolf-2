@@ -1,0 +1,67 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Lighting/light.png" type="Texture" id=1]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+blend_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id=2]
+blend_mode = 1
+
+[node name="fake flare" type="Light2D"]
+modulate = Color( 0.188235, 0.121569, 0.121569, 1 )
+position = Vector2( 1588.21, 235.11 )
+rotation = 0.0349066
+scale = Vector2( 0.36, 0.36 )
+texture = ExtResource( 1 )
+offset = Vector2( -20, 20 )
+texture_scale = 0.69
+color = Color( 0.337255, 0.0980392, 0.0352941, 1 )
+energy = 3.7
+range_z_min = -2048
+range_z_max = 2048
+shadow_enabled = true
+shadow_color = Color( 0.0392157, 0.0313726, 0.0313726, 0 )
+
+[node name="fake2D3" type="Light2D" parent="."]
+position = Vector2( 180.132, -225.014 )
+rotation = -3.72529e-09
+texture = ExtResource( 1 )
+offset = Vector2( -100, 100 )
+texture_scale = 0.4
+color = Color( 0.588235, 0.0784314, 0.0431373, 1 )
+energy = 3.51
+
+[node name="fake2D2" type="Light2D" parent="."]
+visible = false
+position = Vector2( -144.928, 350.528 )
+texture = ExtResource( 1 )
+offset = Vector2( -100, 100 )
+texture_scale = 1.65
+color = Color( 0.843137, 0.545098, 0.34902, 1 )
+energy = 1.8
+
+[node name="Sprite2" type="Sprite" parent="."]
+visible = false
+modulate = Color( 1, 0, 0.470588, 1 )
+material = SubResource( 1 )
+position = Vector2( -3.3252, -2.50443 )
+rotation = 0.0349066
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 1 )
+offset = Vector2( -20, 20 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 1, 0.105882, 0.294118, 1 )
+material = SubResource( 2 )
+position = Vector2( -144.928, 350.528 )
+rotation = -7.45058e-09
+scale = Vector2( 1.2, 1.2 )
+texture = ExtResource( 1 )
+offset = Vector2( -100, 100 )
+__meta__ = {
+"_editor_description_": ""
+}

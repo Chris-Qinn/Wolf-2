@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://gimpassets/biggerstarrysky1.png" type="Texture" id=3]
+[ext_resource path="res://gimpassets/biggerstarrysky-twinklenone.png" type="Texture" id=4]
+[ext_resource path="res://gimpassets/biggerstarrysky-twinkle9.png" type="Texture" id=10]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [  ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 4 ), ExtResource( 4 ), ExtResource( 4 ), ExtResource( 4 ), ExtResource( 4 ), ExtResource( 4 ), ExtResource( 4 ), ExtResource( 4 ), ExtResource( 4 ), ExtResource( 4 ), ExtResource( 4 ), ExtResource( 10 ), ExtResource( 4 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "default",
+"speed": 4.0
+} ]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="sky" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+playing = true
+
+[node name="biggerstarrysky1" type="Sprite" parent="sky"]
+position = Vector2( 962.453, 554.728 )
+scale = Vector2( 0.469948, 0.513637 )
+texture = ExtResource( 3 )
+
+[node name="twinkle9" type="AnimatedSprite" parent="sky/biggerstarrysky1"]
+frames = SubResource( 2 )
+frame = 11
+playing = true
