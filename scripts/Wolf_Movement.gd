@@ -19,8 +19,6 @@ var is_bouncy = false
 
 var has_colours = ["white"]
 
-var heart = preload("res://Heart.tscn");
-
 #var on_ground
 #var on_wall
 #var on_ceil
@@ -46,33 +44,18 @@ func _ready():
 
 # Put wolf changing animations in here :D
 func change_wolf(colour):
-	var mycol = Color();
 	if colour == "white":
 		wolf = "white"
 		$WolfSprite.animation = "white"
-		mycol.r = 1.0
-		mycol.g = 1.0
-		mycol.b = 1.0
 	elif colour == "green" and "green" in has_colours:
 		wolf = "green"
-		mycol.r = 0.2
-		mycol.g = 1
-		mycol.b = 0.2
 		$WolfSprite.animation = "green"
 	elif colour == "yellow" and "yellow" in has_colours:
 		wolf = "yellow"
-		mycol.r = 1
-		mycol.g = 1
-		mycol.b = 0.2
 		$WolfSprite.animation = "yellow"
 	elif colour == "pink" and "pink" in has_colours:
 		wolf = "pink"
-		mycol.r = 1
-		mycol.g = 0.5
-		mycol.b = 0.5
 		$WolfSprite.animation = "pink_wall_hold"
-	$CPUParticles2D.color = mycol;
-	$WolfSprite/Light2D.color = mycol;
 
 
 # Update controls somewhat
@@ -118,7 +101,7 @@ func do_dash( delta ):
 		if dash_buffer <= 0.07:
 			state = "dashing"
 			
-			var h = heart.instance()
+			var h = load("res://Heart.tscn").instance()
 			h.position = get_position() + get_parent().get_position()
 			get_node("/root").add_child(h)
 			
@@ -126,7 +109,9 @@ func do_dash( delta ):
 			if velocity.x == 0 and get_dash_direction().x != 0:
 				dash_buffer = 0.04
 				velocity = 5*get_dash_direction();
-			elif Input.is_action_pressed("dash"):
+			elif get_dash_direction().x == velocity.x/5:
+				dash_buffer = 0.07
+			elif get_dash_direction().x == 0:
 				dash_buffer = 0.07
 			else:
 				dash_buffer = 0.04
@@ -143,7 +128,7 @@ func do_dash( delta ):
 		hasdash = false
 		var dash_d = get_dash_direction()
 		print(dash_d)
-		dash_buffer = 0.15
+		dash_buffer = 0.3
 		velocity = dash_d*0.001
 		return "not"
 
@@ -180,7 +165,7 @@ func state_machine( delta ):
 			state = "falling"
 			print("Falling now?");
 
-	if hasdash and Input.is_action_just_pressed("dash") and "yellow" in has_colours and state != "dashprepping":
+	if hasdash and Input.is_action_just_pressed("dash") and "yellow" in has_colours:
 		do_dash( delta )
 		change_wolf( "yellow" )
 	
@@ -211,6 +196,35 @@ func state_machine( delta ):
 		elif LRJoy >= 0 and LRKey >= 0:
 			state = "falling"
 			$WolfSprite.animation = "pink"
+#
+#
+#
+#	acceleration.x = LRJoy
+#
+#	if LRJoy == 0:
+#		acceleration.x = LRKey
+#
+#	if hasdash and Input.is_action_just_pressed("dash"):
+#		var dash_d = get_dash_direction()
+#		velocity = dash_d * 5;
+#		hasdash = false
+#
+#	if Input.is_action_pressed("bounce"):
+#		wolf = "bounce";
+#	else:
+#		wolf = "not";
+#
+#	if is_on_surface and (surface_normal.y < -0.5 or velocity.y == 0):
+#		hasdash = true
+#		if Input.is_action_just_pressed("jump"):
+#			jumping = true
+#			jump_buffer = 0.15;
+#			velocity.y = -jumpvelocity;
+#	elif Input.is_action_pressed("jump") and jump_buffer > 0:
+#		jumping = true
+#	else:
+#		jumping = false
+#		jump_buffer = 0
 
 
 func _physics_process(delta):
@@ -218,6 +232,10 @@ func _physics_process(delta):
 	if position.x < -2000 or position.x > 2000 or position.y > 2000 or position.y < -2000:
 		get_tree().reload_current_scene()
 
+	# Define some states that help us figure out what we're doing
+#	on_ground = is_on_surface and (surface_normal.y < -0.5)
+#	on_wall = is_on_surface and (abs(surface_normal.y) <= 0.5)
+#	on_ceil = is_on_surface and not on_wall and not on_ground
 
 	controls()
 
@@ -267,12 +285,47 @@ func _physics_process(delta):
 	
 	
 	
+	
+#	var v_x_limit = max(1.5*Input.get_action_strength("left"), 1.5*Input.get_action_strength("right"))
+#	if Input.is_action_pressed("key_left") or Input.is_action_pressed("key_right"):
+#		v_x_limit = 1.5;
+#
+#
+#	# Control velocity and acceleration in the x-axis
+#	if on_ground and acceleration.x == 0:
+#		# On the ground and not trying to accelerate
+#		acceleration.x = -0.2*velocity.x
+#		velocity.x += acceleration.x * 30 * delta
+#	elif abs(velocity.x) > v_x_limit and ( 
+#		(velocity.x<0 and acceleration.x<0) or (velocity.x>0 and acceleration.x>0)
+#		):
+#		# Cannot accelerate any faster
+#		pass
+#	elif on_ground:
+#		velocity.x += acceleration.x*30*delta
+#		velocity.x = min( max( -v_x_limit, velocity.x ), v_x_limit )
+#	elif wolf != "bounce":
+#		velocity.x += acceleration.x*30*delta
+#		velocity.x = min( max( -v_x_limit, velocity.x ), v_x_limit )
+
+
+	
+#	if on_ground == false:
+#		velocity.x *= 1.8
+#	else:
+#		velocity.x *= 1.2
+#
+#	var motion = velocity*delta*movespeed
+#
+#	if on_ground == false:
+#		velocity.x /= 1.8
+#	else:
+#		velocity.x /= 1.2
 
 	var collision = move_and_collide(motion)
 	if collision:
 #		is_on_surface = true;
 		surface_normal = collision.normal
-		print("Collision");
 		
 		# Check if this is ground enough to give dash back
 		if collision.normal.y < -0.5:
@@ -307,8 +360,7 @@ func _physics_process(delta):
 				velocity.y = 0;
 	elif state == "rightwalling" or state == "leftwalling" or state == "grounded":
 		state = "falling"
-		if wolf == "pink":
-			$WolfSprite.animation = "pink"
+		$WolfSprite.animation = "pink"
 
 #	else:
 #		is_on_surface = false;
@@ -318,39 +370,4 @@ func _physics_process(delta):
 	elif velocity.x < 0 or state == "rightwalling":
 		$"WolfSprite".flip_h = true;
 	
-	if state == "leftwalling" or state == "rightwalling":
-		velocity.y = -1;
 	
-#	get_parent().get_node("CPUParticles2D").direction = -velocity.normalized()
-	$"CPUParticles2D".direction = -velocity.normalized()
-	
-	var mini_cols = has_colours.duplicate()
-	mini_cols.erase(wolf)
-	for i in range(3):
-		var m_w
-		if i==0: m_w = $WolfSprite/M1
-		elif i==1: m_w = $WolfSprite/M2
-		else: m_w = $WolfSprite/M3
-
-		if len(mini_cols) > i:
-			
-			m_w.show();
-			m_w.set_goal_pos((-300-300*i)*velocity.normalized())
-			m_w.change_wolf(mini_cols[i])
-		else:
-			m_w.hide();
-	
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
