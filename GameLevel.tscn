@@ -129,7 +129,7 @@ shadow_color = Color( 0.0392157, 0.0313726, 0.0313726, 0 )
 [node name="starryskies" parent="." instance=ExtResource( 6 )]
 show_behind_parent = true
 use_parent_material = true
-position = Vector2( -4.52649, -1.1311 )
+position = Vector2( -11.0018, -1.1311 )
 
 [node name="TileMap" parent="." instance=ExtResource( 2 )]
 show_behind_parent = true
