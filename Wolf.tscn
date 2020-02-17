@@ -19,33 +19,6 @@ script = ExtResource( 3 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WolfBody"]
 shape = SubResource( 1 )
 
-[node name="WolfSprite" type="AnimatedSprite" parent="WolfBody"]
-material = SubResource( 2 )
-position = Vector2( -1, -2 )
-scale = Vector2( 0.115, 0.115 )
-frames = ExtResource( 1 )
-animation = "white"
-playing = true
-
-[node name="Light2D" type="Light2D" parent="WolfBody/WolfSprite"]
-show_behind_parent = true
-texture = ExtResource( 6 )
-texture_scale = 1.5
-energy = 1.53
-shadow_enabled = true
-
-[node name="M1" parent="WolfBody/WolfSprite" instance=ExtResource( 2 )]
-position = Vector2( 8.69565, 17.3913 )
-scale = Vector2( 8.69565, 8.69565 )
-
-[node name="M2" parent="WolfBody/WolfSprite" instance=ExtResource( 2 )]
-position = Vector2( 8.69565, 17.3913 )
-scale = Vector2( 8.69565, 8.69565 )
-
-[node name="M3" parent="WolfBody/WolfSprite" instance=ExtResource( 2 )]
-position = Vector2( 8.69565, 17.3913 )
-scale = Vector2( 8.69565, 8.69565 )
-
 [node name="CPUParticles2D" type="CPUParticles2D" parent="WolfBody"]
 show_behind_parent = true
 position = Vector2( 0, 2 )
@@ -69,3 +42,33 @@ color = Color( 0.0784314, 0.843137, 0.827451, 1 )
 __meta__ = {
 "_editor_description_": ""
 }
+
+[node name="WolfSprite" type="AnimatedSprite" parent="WolfBody"]
+material = SubResource( 2 )
+position = Vector2( -1, -2 )
+scale = Vector2( 0.115, 0.115 )
+frames = ExtResource( 1 )
+animation = "white"
+playing = true
+
+[node name="Light2D" type="Light2D" parent="WolfBody/WolfSprite"]
+show_behind_parent = true
+texture = ExtResource( 6 )
+texture_scale = 1.5
+energy = 1.53
+shadow_enabled = true
+
+[node name="M1" parent="WolfBody/WolfSprite" instance=ExtResource( 2 )]
+show_behind_parent = true
+position = Vector2( 8.69565, 17.3913 )
+scale = Vector2( 8.69565, 8.69565 )
+
+[node name="M2" parent="WolfBody/WolfSprite" instance=ExtResource( 2 )]
+show_behind_parent = true
+position = Vector2( 8.69565, 17.3913 )
+scale = Vector2( 8.69565, 8.69565 )
+
+[node name="M3" parent="WolfBody/WolfSprite" instance=ExtResource( 2 )]
+show_behind_parent = true
+position = Vector2( 8.69565, 17.3913 )
+scale = Vector2( 8.69565, 8.69565 )
