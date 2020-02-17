@@ -1,41 +1,15 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Wolf.tscn" type="PackedScene" id=1]
-[ext_resource path="res://platform_ish.tscn" type="PackedScene" id=2]
+[ext_resource path="res://TileMap.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Heart.tscn" type="PackedScene" id=3]
-[ext_resource path="res://starryskiesLESSLAG.tscn" type="PackedScene" id=4]
+[ext_resource path="res://noticon.png" type="Texture" id=4]
 [ext_resource path="res://audio/ambientSFX.wav" type="AudioStream" id=5]
-[ext_resource path="res://icon.png" type="Texture" id=6]
+[ext_resource path="res://starryskiesNOLAG.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Lighting/light.png" type="Texture" id=7]
-[ext_resource path="res://Photos/tree_wall.png" type="Texture" id=8]
 [ext_resource path="res://cloud1.tscn" type="PackedScene" id=9]
-[ext_resource path="res://glowplant.tscn" type="PackedScene" id=10]
-[ext_resource path="res://fake flare.tscn" type="PackedScene" id=11]
 
-[sub_resource type="GDScript" id=1]
-script/source = "extends CPUParticles2D
-
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = \"text\"
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-"
-
-[sub_resource type="AtlasTexture" id=2]
-flags = 4
-atlas = ExtResource( 8 )
-
-[sub_resource type="Shader" id=3]
+[sub_resource type="Shader" id=1]
 code = "shader_type spatial;
 render_mode blend_mix,depth_draw_opaque,cull_back,diffuse_burley,specular_schlick_ggx;
 uniform vec4 albedo : hint_color;
@@ -67,8 +41,8 @@ void fragment() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id=4]
-shader = SubResource( 3 )
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
 shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/specular = 0.5
 shader_param/metallic = 0.0
@@ -79,8 +53,8 @@ shader_param/uv1_offset = Vector3( 0, 0, 0 )
 shader_param/uv2_scale = Vector3( 1, 1, 1 )
 shader_param/uv2_offset = Vector3( 0, 0, 0 )
 
-[sub_resource type="CanvasItemMaterial" id=5]
-next_pass = SubResource( 4 )
+[sub_resource type="CanvasItemMaterial" id=3]
+next_pass = SubResource( 2 )
 blend_mode = 1
 light_mode = 2
 
@@ -117,50 +91,10 @@ color = Color( 0.843137, 0.545098, 0.34902, 1 )
 energy = 1.8
 
 [node name="Node2D" parent="." instance=ExtResource( 9 )]
+position = Vector2( 1272.06, 66.2328 )
 
 [node name="Wolf" parent="." instance=ExtResource( 1 )]
 position = Vector2( 760.956, 292.867 )
-
-[node name="CPUParticles2D" type="CPUParticles2D" parent="Wolf"]
-show_behind_parent = true
-position = Vector2( 0, 2 )
-rotation = 1.5708
-amount = 10
-lifetime = 6.0
-preprocess = 0.23
-speed_scale = 6.89
-randomness = 0.26
-draw_order = 1
-texture = ExtResource( 7 )
-emission_shape = 2
-emission_rect_extents = Vector2( 10, 10 )
-direction = Vector2( 0, 0 )
-spread = 0.0
-gravity = Vector2( 0, 3 )
-scale_amount = 0.01
-color = Color( 0.0784314, 0.843137, 0.827451, 1 )
-script = SubResource( 1 )
-
-[node name="platform\?" parent="." instance=ExtResource( 2 )]
-position = Vector2( 500, 437 )
-rotation = -0.785398
-scale = Vector2( 2, 12 )
-
-[node name="KinematicBody2D" type="KinematicBody2D" parent="."]
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="KinematicBody2D"]
-position = Vector2( 208.954, 114.412 )
-scale = Vector2( 1.62665, 1.5461 )
-polygon = PoolVector2Array( 20, -7.642, 20, 98.851, 20, 585, 1002, 585, 1002, -5.057, 1042.91, -5.05682, 1044.21, 620.443, -15.5258, 612.689, -11.6487, -17.9804 )
-one_way_collision_margin = 0.0
-__meta__ = {
-"_editor_description_": ""
-}
-
-[node name="Polygon2D" type="Polygon2D" parent="KinematicBody2D/CollisionPolygon2D"]
-color = Color( 0.164706, 0.152941, 0.152941, 1 )
-texture = SubResource( 2 )
-polygon = PoolVector2Array( 20, -7.642, 20, 585, 1002, 585, 1002, -5.057, 1042.91, -5.05682, 1044.21, 620.443, -15.5258, 612.689, -11.6487, -17.9804 )
 
 [node name="Node2D2" parent="." instance=ExtResource( 3 )]
 
@@ -174,12 +108,12 @@ autoplay = true
 show_behind_parent = true
 position = Vector2( 1618.25, 187.93 )
 scale = Vector2( 1.2, 1.2 )
-texture = ExtResource( 6 )
+texture = ExtResource( 4 )
 offset = Vector2( 25, -25 )
 
 [node name="Light2D2" type="Light2D" parent="Background/sunplaceholder"]
 modulate = Color( 0.188235, 0.121569, 0.121569, 0.631373 )
-material = SubResource( 5 )
+material = SubResource( 3 )
 position = Vector2( 25.728, -25.7281 )
 scale = Vector2( 0.3, 0.3 )
 texture = ExtResource( 7 )
@@ -191,6 +125,11 @@ range_z_max = 2048
 shadow_enabled = true
 shadow_color = Color( 0.0392157, 0.0313726, 0.0313726, 0 )
 
-[node name="StarsLESSLAG" parent="." instance=ExtResource( 4 )]
+[node name="starryskies" parent="." instance=ExtResource( 6 )]
 show_behind_parent = true
-position = Vector2( -0.000244141, 0 )
+use_parent_material = true
+position = Vector2( -4.52649, -1.1311 )
+
+[node name="TileMap" parent="." instance=ExtResource( 2 )]
+show_behind_parent = true
+tile_data = PoolIntArray( 458779, 11, 0, 458780, 11, 0, 458781, 11, 0, 524315, 11, 0, 524316, 11, 0, 524317, 11, 0, 589851, 11, 0, 589852, 11, 0, 589853, 11, 0, 655387, 11, 0, 655388, 11, 0, 655389, 11, 0, 720921, 11, 0, 720922, 11, 0, 720923, 11, 0, 720924, 11, 0, 720925, 11, 0, 786457, 11, 0, 786458, 11, 0, 786459, 0, 0, 786460, 0, 0, 786461, 0, 0, 851994, 0, 0, 851995, 0, 0, 851996, 0, 0, 851997, 0, 0, 917530, 0, 0, 917531, 0, 0, 917532, 0, 0, 917533, 0, 0, 983066, 0, 0, 983067, 0, 0, 983068, 0, 0, 983069, 0, 0, 1048576, 7, 0, 1048577, 8, 0, 1048578, 7, 0, 1048579, 7, 0, 1048580, 7, 0, 1048581, 8, 0, 1048582, 7, 0, 1048583, 7, 0, 1048584, 7, 0, 1048585, 7, 0, 1048586, 8, 0, 1048587, 7, 0, 1048588, 8, 0, 1048589, 7, 0, 1048590, 8, 0, 1048591, 7, 0, 1048592, 8, 0, 1048593, 7, 0, 1048594, 8, 0, 1048595, 7, 0, 1048596, 8, 0, 1048597, 7, 0, 1048598, 7, 0, 1048599, 7, 0, 1048600, 8, 0, 1048601, 7, 0, 1048602, 7, 0, 1048603, 7, 0, 1048604, 8, 0, 1048605, 7, 0 )
