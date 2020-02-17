@@ -38,6 +38,7 @@ func _ready():
 	acceleration.y = 2;
 	jump_buffer = 0;
 	hasdash = true;
+	change_wolf("white")
 #	on_ceil = false
 #	on_ground = false
 #	on_wall = false
