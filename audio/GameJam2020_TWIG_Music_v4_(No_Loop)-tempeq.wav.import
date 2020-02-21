@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/GameJam2020_TWIG_Music_v4_(No_Loop)-tempeq.wav-2457b1d57ec6e452502c0093cb047d3b.sample"
+
+[deps]
+
+source_file="res://audio/GameJam2020_TWIG_Music_v4_(No_Loop)-tempeq.wav"
+dest_files=[ "res://.import/GameJam2020_TWIG_Music_v4_(No_Loop)-tempeq.wav-2457b1d57ec6e452502c0093cb047d3b.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

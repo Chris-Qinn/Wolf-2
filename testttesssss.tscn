@@ -5,6 +5,8 @@
 [ext_resource path="res://wolf_to_save.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Progress.tscn" type="PackedScene" id=4]
 [ext_resource path="res://glowplant.tscn" type="PackedScene" id=5]
+[ext_resource path="res://music-play.tscn" type="PackedScene" id=6]
+[ext_resource path="res://DefaultWorldEnviroment.tscn" type="PackedScene" id=7]
 
 [node name="Node2D" type="Node2D"]
 
@@ -18,11 +20,15 @@ scale = Vector2( 0.3, 0.3 )
 [node name="Wolf" parent="." instance=ExtResource( 1 )]
 position = Vector2( 151.544, 1008.8 )
 
-[node name="Progress" parent="Wolf" instance=ExtResource( 4 )]
-position = Vector2( 1788.58, -46.6478 )
-scale = Vector2( 1, 2 )
-nextLevel = "Level_Chris.tscn"
-
 [node name="GLowPlant" parent="." instance=ExtResource( 3 )]
 position = Vector2( 1092.53, 240.408 )
 colour = "pink"
+
+[node name="WorldEnvironment" parent="." instance=ExtResource( 7 )]
+
+[node name="Progress" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1940.12, 962.152 )
+scale = Vector2( 1, 2 )
+nextLevel = "Level_Chris.tscn"
+
+[node name="music" parent="." instance=ExtResource( 6 )]

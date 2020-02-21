@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Wolf.tscn" type="PackedScene" id=1]
 [ext_resource path="res://TileMap.tscn" type="PackedScene" id=2]
@@ -9,6 +9,9 @@
 [ext_resource path="res://Lighting/light.png" type="Texture" id=7]
 [ext_resource path="res://Progress.tscn" type="PackedScene" id=8]
 [ext_resource path="res://cloud1.tscn" type="PackedScene" id=9]
+[ext_resource path="res://DefaultWorldEnviroment.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Miranda/spaceship.png" type="Texture" id=11]
+[ext_resource path="res://Miranda/mountain 2.png" type="Texture" id=12]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type spatial;
@@ -60,6 +63,15 @@ blend_mode = 1
 light_mode = 2
 
 [node name="GameLevel" type="Node2D"]
+
+[node name="mountain 2" type="Sprite" parent="."]
+position = Vector2( 299.354, 1053.23 )
+texture = ExtResource( 12 )
+
+[node name="spaceship" type="Sprite" parent="."]
+position = Vector2( 300, 900 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 11 )
 
 [node name="fake flare" type="Light2D" parent="."]
 modulate = Color( 0.188235, 0.121569, 0.121569, 0.631373 )
@@ -129,10 +141,8 @@ shadow_color = Color( 0.0392157, 0.0313726, 0.0313726, 0 )
 [node name="starryskies" parent="." instance=ExtResource( 6 )]
 show_behind_parent = true
 use_parent_material = true
-position = Vector2( -11.0018, -1.1311 )
 
 [node name="TileMap" parent="." instance=ExtResource( 2 )]
-show_behind_parent = true
 tile_data = PoolIntArray( 458779, 11, 0, 458780, 11, 0, 458781, 11, 0, 524315, 11, 0, 524316, 11, 0, 524317, 11, 0, 589851, 11, 0, 589852, 11, 0, 589853, 11, 0, 655387, 11, 0, 655388, 11, 0, 655389, 11, 0, 720921, 11, 0, 720922, 11, 0, 720923, 11, 0, 720924, 11, 0, 720925, 11, 0, 786457, 11, 0, 786458, 11, 0, 786459, 0, 0, 786460, 0, 0, 786461, 0, 0, 851994, 0, 0, 851995, 0, 0, 851996, 0, 0, 851997, 0, 0, 917530, 0, 0, 917531, 0, 0, 917532, 0, 0, 917533, 0, 0, 983066, 0, 0, 983067, 0, 0, 983068, 0, 0, 983069, 0, 0, 1048576, 7, 0, 1048577, 7, 0, 1048578, 7, 0, 1048579, 7, 0, 1048580, 7, 0, 1048581, 7, 0, 1048582, 7, 0, 1048583, 7, 0, 1048584, 7, 0, 1048585, 7, 0, 1048586, 7, 0, 1048587, 7, 0, 1048588, 7, 0, 1048589, 7, 0, 1048590, 7, 0, 1048591, 7, 0, 1048592, 7, 0, 1048593, 7, 0, 1048594, 7, 0, 1048595, 7, 0, 1048596, 7, 0, 1048597, 7, 0, 1048598, 7, 0, 1048599, 7, 0, 1048600, 7, 0, 1048601, 7, 0, 1048602, 7, 0, 1048603, 7, 0, 1048604, 7, 0, 1048605, 7, 0 )
 
 [node name="Progress" parent="." instance=ExtResource( 8 )]

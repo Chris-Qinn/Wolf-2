@@ -19,6 +19,10 @@ config/name="Wolf^2"
 run/main_scene="res://GameLevel.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+MusicPlay="*res://music-play.tscn"
+
 [display]
 
 window/size/width=1920

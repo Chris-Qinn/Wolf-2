@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://mytiles.tres" type="TileSet" id=1]
 [ext_resource path="res://wolf_to_save.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://glowplant3.tscn" type="PackedScene" id=7]
 [ext_resource path="res://glowplant.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Lava_hitbox.tscn" type="PackedScene" id=9]
+[ext_resource path="res://DefaultWorldEnviroment.tscn" type="PackedScene" id=11]
 
 [node name="TileMap" type="TileMap"]
 scale = Vector2( 2, 2 )
@@ -133,3 +134,5 @@ position = Vector2( 881.816, 493.53 )
 [node name="Progress" parent="." instance=ExtResource( 5 )]
 position = Vector2( 976.84, 63.7192 )
 nextLevel = "GameLevel.tscn"
+
+[node name="WorldEnvironment" parent="." instance=ExtResource( 11 )]

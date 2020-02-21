@@ -1,0 +1,19 @@
+[gd_resource type="Environment" format=2]
+
+[resource]
+ambient_light_energy = 0.5
+ambient_light_sky_contribution = 0.0
+fog_color = Color( 0.109804, 0.180392, 0.247059, 1 )
+tonemap_mode = 2
+tonemap_exposure = 6.8
+tonemap_white = 0.5
+dof_blur_far_amount = 1.0
+glow_enabled = true
+glow_intensity = 8.0
+glow_strength = 2.0
+glow_bloom = 0.87
+glow_blend_mode = 0
+glow_hdr_threshold = 0.17
+glow_hdr_luminance_cap = 194.86
+glow_hdr_scale = 3.05
+adjustment_enabled = true
